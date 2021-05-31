@@ -15,7 +15,7 @@
 -- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 -- 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 
-**Query #1**
+--Query 1
 
     SELECT 
     	customer_id AS Customer, SUM(price) AS Amount_Spent
@@ -31,7 +31,7 @@
 | A        | 76           |
 
 ---
-**Query #2**
+--Query 2
 
     SELECT 
     	customer_id AS Customer, COUNT(DISTINCT(order_date)) AS Visits
@@ -46,7 +46,7 @@
 | C        | 2      |
 
 ---
-**Query #3**
+--Query 3
 
     WITH temp_table AS(                                         
     SELECT 
@@ -69,7 +69,7 @@
 | C           | ramen        |
 
 ---
-**Query #4**
+--Query 4
 
     SELECT
     	product_name, COUNT(sales.product_id)
@@ -88,7 +88,7 @@
 | ramen        | 8     |
 
 ---
-**Query #5**
+--Query 5
 
     WITH temp_table AS (
     SELECT customer_id, product_id, COUNT(product_id) AS prod_by_cust
@@ -112,7 +112,7 @@
 | C           | ramen        |
 
 ---
-**Query #6**
+--Query 6
 
     SELECT customer_id, product_name
      FROM(
@@ -133,7 +133,7 @@
 | B           | sushi        |
 
 ---
-**Query #7**
+--Query 7
 
     WITH temp_table AS(
     SELECT sales.customer_id, order_date, product_id, join_date, RANK()OVER(PARTITION BY sales.customer_id ORDER BY order_date DESC) AS Rank
@@ -155,7 +155,7 @@
 | B           | sushi        |
 
 ---
-**Query #8**
+--Query 8
 
     SELECT sales.customer_id AS Customer, COUNT(sales.product_id) AS Total_Product, SUM(price) AS Total_Spent
     FROM sales
@@ -173,7 +173,7 @@
 | B        | 3             | 40          |
 
 ---
-**Query #9**
+--Query 9
 
     WITH temp_table AS (
     SELECT customer_id, 
@@ -195,7 +195,7 @@
 | C           | 360 |
 
 ---
-**Query #10**
+--Query 10
 
     SELECT customer_id, SUM(points)
     FROM(
@@ -215,7 +215,7 @@
 | A           | 1020 |
 
 ---
-**Query #11**
+--Query Bonus Question 1
 
     SELECT sales.customer_id, order_date, product_name,price,
     CASE
@@ -248,7 +248,7 @@
 | C           | 2021-01-07T00:00:00.000Z | ramen        | 12    | N      |
 
 ---
-**Query #12**
+--Query Bonus Question 2
 
     SELECT *, 
     CASE 
